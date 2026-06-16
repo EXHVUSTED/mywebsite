@@ -1,9 +1,15 @@
+import WorkExamples from '../components/WorkExamples'
+import { useLanguage } from '../i18n'
+
 export default function Home() {
+  const { t } = useLanguage()
+
   return (
-    <div style={{padding:24,maxWidth:900,margin:'0 auto'}}>
-      <h1>Главная</h1>
-      <p>Это главная страница: кратко рассказывает, какие услуги вы оказываетe, преимущества и призыв к действию.</p>
-      <p>Здесь удобно разместить короткое продающее описание и ссылку на страницу заказов.</p>
+    <div className="page">
+      <h1>{t.home.title}</h1>
+      <p>{t.home.intro}</p>
+      <p>{t.home.details}</p>
+      <WorkExamples compact />
     </div>
   )
 }

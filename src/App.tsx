@@ -1,31 +1,56 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { LanguageProvider, languages, useLanguage } from './i18n'
 import Home from './pages/Home'
-import Examples from './pages/Examples'
 import Order from './pages/Order'
 import Contact from './pages/Contact'
 import './App.css'
 
-export default function App() {
+function AppContent() {
+  const { language, setLanguage, t } = useLanguage()
+
   return (
     <Router>
-      <header style={{padding:16,background:'#f7f7f7',borderBottom:'1px solid #e1e1e1'}}>
-        <h1 style={{margin:0,fontSize:20}}>Мой сайт услуг</h1>
-        <nav style={{marginTop:8}}>
-          <Link to="/" style={{marginRight:12}}>Главная</Link>
-          <Link to="/examples" style={{marginRight:12}}>Примеры работ</Link>
-          <Link to="/order" style={{marginRight:12}}>Заказать</Link>
-          <Link to="/contact">Контакты</Link>
+      <header className="site-header">
+        <div className="site-header__top">
+          <h1 className="site-header__title">{t.siteTitle}</h1>
+          <label className="language-switcher">
+            <span>{t.language.label}</span>
+            <select
+              className="language-switcher__select"
+              value={language}
+              onChange={(event) => setLanguage(event.target.value as typeof language)}
+            >
+              {languages.map((languageOption) => (
+                <option key={languageOption} value={languageOption}>
+                  {t.language.names[languageOption]}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <nav className="site-nav">
+          <Link to="/">{t.nav.home}</Link>
+          <Link to="/order">{t.nav.order}</Link>
+          <Link to="/contact">{t.nav.contact}</Link>
         </nav>
       </header>
 
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/examples" element={<Examples />} />
           <Route path="/order" element={<Order />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
     </Router>
+  )
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }

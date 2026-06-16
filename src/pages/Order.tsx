@@ -1,13 +1,17 @@
+import { useLanguage } from '../i18n'
+
 export default function Order() {
+  const { t } = useLanguage()
+
   return (
-    <div style={{padding:24,maxWidth:900,margin:'0 auto'}}>
-      <h1>Заказать</h1>
-      <p>Страница для оформления заказа: здесь приведён список услуг и ориентировочные цены, а также инструкция, как с вами связаться для уточнения деталей.</p>
-      <h2>Услуги и примерные цены</h2>
-      <ul>
-        <li>Создание лендинга — от 20 000 ₽</li>
-        <li>Разработка интернет-магазина — от 50 000 ₽</li>
-        <li>Редизайн сайта — от 15 000 ₽</li>
+    <div className="page">
+      <h1>{t.order.title}</h1>
+      <p>{t.order.intro}</p>
+      <h2 className="page__section-title">{t.order.servicesTitle}</h2>
+      <ul className="page__list">
+        {t.order.services.map((service) => (
+          <li key={service}>{service}</li>
+        ))}
       </ul>
     </div>
   )
