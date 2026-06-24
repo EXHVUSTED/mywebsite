@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   type PropsWithChildren,
@@ -20,6 +21,11 @@ type Translation = {
     label: string
     names: Record<Language, string>
   }
+  theme: {
+    toggle: string
+    light: string
+    dark: string
+  }
   home: {
     title: string
     intro: string
@@ -29,7 +35,12 @@ type Translation = {
     title: string
     intro: string
     servicesTitle: string
-    services: string[]
+    chooseService: string
+    services: {
+      title: string
+      price: string
+      note: string
+    }[]
   }
   contact: {
     title: string
@@ -43,9 +54,12 @@ type Translation = {
     next: string
     openDemo: string
     hostNote: string
+    projectList: string
+    currentProject: string
+    fallbackTitle: string
     items: {
       title: string
-      description: string
+      description?: string
       url: string
     }[]
   }
@@ -69,6 +83,11 @@ export const translations: Record<Language, Translation> = {
         en: 'English',
       },
     },
+    theme: {
+      toggle: 'Сменить тему',
+      light: 'Светлая тема',
+      dark: 'Темная тема',
+    },
     home: {
       title: 'Главная',
       intro:
@@ -81,10 +100,23 @@ export const translations: Record<Language, Translation> = {
       intro:
         'Страница для оформления заказа: здесь приведен список услуг и ориентировочные цены, а также инструкция, как связаться для уточнения деталей.',
       servicesTitle: 'Услуги и примерные цены',
+      chooseService: 'Выбрать услугу',
       services: [
-        'Создание лендинга - от 20 000 руб.',
-        'Разработка интернет-магазина - от 50 000 руб.',
-        'Редизайн сайта - от 15 000 руб.',
+        {
+          title: 'Лендинг',
+          price: 'от 20 000 руб.',
+          note: 'Одностраничный сайт для услуги, продукта или события.',
+        },
+        {
+          title: 'Интернет-магазин',
+          price: 'от 50 000 руб.',
+          note: 'Каталог, карточки товаров и базовый путь к заявке.',
+        },
+        {
+          title: 'Редизайн сайта',
+          price: 'от 15 000 руб.',
+          note: 'Обновление визуального стиля и структуры существующей страницы.',
+        },
       ],
     },
     contact: {
@@ -101,24 +133,21 @@ export const translations: Record<Language, Translation> = {
       next: 'Следующая работа',
       openDemo: 'Открыть демо в новой вкладке',
       hostNote: 'Демо может не отображаться из-за настроек хоста.',
+      projectList: 'Список проектов',
+      currentProject: 'Текущий проект',
+      fallbackTitle: 'Проект',
       items: [
         {
           title: 'Garden Products Market',
-          description:
-            'Интернет-магазин садовых товаров с каталогом и витриной продуктов.',
           url: 'https://garden-products-market.vercel.app/',
         },
         {
           title: 'Yona',
-          description:
-            'Лендинг с аккуратной подачей продукта и адаптивным интерфейсом.',
           url: 'https://yona-lovat.vercel.app/',
         },
         {
-          title: 'Simple Web Page',
-          description:
-            'Простой лендинг для вашей компании с контактной информацией и описанием услуг.',
-          url: 'https://simple-web-page-gamma.vercel.app/',
+          title: 'EK Glanz',
+          url: 'https://ek-glanz.vercel.app/',
         },
       ],
     },
@@ -138,6 +167,11 @@ export const translations: Record<Language, Translation> = {
         en: 'English',
       },
     },
+    theme: {
+      toggle: 'Theme wechseln',
+      light: 'Helles Theme',
+      dark: 'Dunkles Theme',
+    },
     home: {
       title: 'Startseite',
       intro:
@@ -150,10 +184,23 @@ export const translations: Record<Language, Translation> = {
       intro:
         'Auf dieser Seite finden Kunden eine Ubersicht der Leistungen, ungefähre Preise und Hinweise, wie sie Details mit Ihnen besprechen konnen.',
       servicesTitle: 'Leistungen und Richtpreise',
+      chooseService: 'Leistung wahlen',
       services: [
-        'Landingpage erstellen - ab 20.000 RUB',
-        'Online-Shop entwickeln - ab 50.000 RUB',
-        'Website-Redesign - ab 15.000 RUB',
+        {
+          title: 'Landingpage',
+          price: 'ab 20.000 RUB',
+          note: 'Einseitige Website fur eine Leistung, ein Produkt oder ein Event.',
+        },
+        {
+          title: 'Online-Shop',
+          price: 'ab 50.000 RUB',
+          note: 'Katalog, Produktseiten und ein einfacher Anfrageweg.',
+        },
+        {
+          title: 'Website-Redesign',
+          price: 'ab 15.000 RUB',
+          note: 'Auffrischung von Stil und Struktur einer bestehenden Seite.',
+        },
       ],
     },
     contact: {
@@ -171,24 +218,21 @@ export const translations: Record<Language, Translation> = {
       openDemo: 'Demo in neuem Tab offnen',
       hostNote:
         'Die Demo wird je nach Hosting-Einstellungen moglicherweise nicht eingebettet angezeigt.',
+      projectList: 'Projektliste',
+      currentProject: 'Aktuelles Projekt',
+      fallbackTitle: 'Projekt',
       items: [
         {
           title: 'Garden Products Market',
-          description:
-            'Online-Shop fur Gartenprodukte mit Katalog und Produktprasentation.',
           url: 'https://garden-products-market.vercel.app/',
         },
         {
           title: 'Yona',
-          description:
-            'Landingpage mit klarer Produktprasentation und responsivem Interface.',
           url: 'https://yona-lovat.vercel.app/',
         },
         {
-          title: 'Simple Web Page',
-          description:
-            'Простой лендинг для вашей компании с контактной информацией и описанием услуг.',
-          url: 'https://simple-web-page-gamma.vercel.app/',
+          title: 'EK Glanz',
+          url: 'https://ek-glanz.vercel.app/',
         },
       ],
     },
@@ -208,6 +252,11 @@ export const translations: Record<Language, Translation> = {
         en: 'English',
       },
     },
+    theme: {
+      toggle: 'Change theme',
+      light: 'Light theme',
+      dark: 'Dark theme',
+    },
     home: {
       title: 'Home',
       intro:
@@ -220,10 +269,23 @@ export const translations: Record<Language, Translation> = {
       intro:
         'This page helps customers request a project: it lists services, approximate prices, and how to contact you to clarify details.',
       servicesTitle: 'Services and Approximate Prices',
+      chooseService: 'Choose service',
       services: [
-        'Landing page creation - from 20,000 RUB',
-        'Online store development - from 50,000 RUB',
-        'Website redesign - from 15,000 RUB',
+        {
+          title: 'Landing Page',
+          price: 'from 20,000 RUB',
+          note: 'A one-page website for a service, product, or event.',
+        },
+        {
+          title: 'Online Store',
+          price: 'from 50,000 RUB',
+          note: 'Catalog, product pages, and a basic request flow.',
+        },
+        {
+          title: 'Website Redesign',
+          price: 'from 15,000 RUB',
+          note: 'Refreshing the visual style and structure of an existing page.',
+        },
       ],
     },
     contact: {
@@ -240,24 +302,21 @@ export const translations: Record<Language, Translation> = {
       next: 'Next work',
       openDemo: 'Open demo in a new tab',
       hostNote: 'The demo may not appear inline because of host settings.',
+      projectList: 'Project list',
+      currentProject: 'Current project',
+      fallbackTitle: 'Project',
       items: [
         {
           title: 'Garden Products Market',
-          description:
-            'An online store for garden products with a catalog and product showcase.',
           url: 'https://garden-products-market.vercel.app/',
         },
         {
           title: 'Yona',
-          description:
-            'A landing page with clean product presentation and a responsive interface.',
           url: 'https://yona-lovat.vercel.app/',
         },
         {
-          title: 'Simple Web Page',
-          description:
-            'Простой лендинг для вашей компании с контактной информацией и описанием услуг.',
-          url: 'https://simple-web-page-gamma.vercel.app/',
+          title: 'EK Glanz',
+          url: 'https://ek-glanz.vercel.app/',
         },
       ],
     },

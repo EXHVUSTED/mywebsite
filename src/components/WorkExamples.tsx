@@ -11,6 +11,27 @@ export default function WorkExamples({ compact = false }: WorkExamplesProps) {
   const { items } = t.workExamples
   const activeExample = items[currentIndex] ?? items[0]
 
+  const getProjectTitle = (example: typeof activeExample) => {
+    if (example.title.trim()) {
+      return example.title
+    }
+
+    try {
+      const hostname = new URL(example.url).hostname
+      const slug = hostname.split('.')[0]
+
+      return slug
+        .split('-')
+        .filter(Boolean)
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(' ')
+    } catch {
+      return t.workExamples.fallbackTitle
+    }
+  }
+
+  const activeTitle = getProjectTitle(activeExample)
+
   const showPrevious = () => {
     setCurrentIndex((index) => (index === 0 ? items.length - 1 : index - 1))
   }
@@ -29,10 +50,32 @@ export default function WorkExamples({ compact = false }: WorkExamplesProps) {
       </div>
 
       <article className="work-slider">
-        <div className="work-slider__header">
+        <div className="work-slider__project-tabs" aria-label={t.workExamples.projectList}>
+          {items.map((item, index) => {
+            const title = getProjectTitle(item)
+
+            return (
+              <button
+                className="work-slider__project-tab"
+                data-active={index === currentIndex}
+                key={`${item.url}-${title}`}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+              >
+                {title}
+              </button>
+            )
+          })}
+        </div>
+
+        <div
+          className="work-slider__header"
+          data-has-description={Boolean(activeExample.description)}
+        >
           <div className="work-slider__copy">
-            <h3>{activeExample.title}</h3>
-            <p>{activeExample.description}</p>
+            <span className="work-slider__eyebrow">{t.workExamples.currentProject}</span>
+            <h3>{activeTitle}</h3>
+            {activeExample.description ? <p>{activeExample.description}</p> : null}
           </div>
 
           <div className="work-slider__controls">
@@ -62,7 +105,7 @@ export default function WorkExamples({ compact = false }: WorkExamplesProps) {
           <iframe
             key={activeExample.url}
             src={activeExample.url}
-            title={`${activeExample.title} preview`}
+            title={`${activeTitle} preview`}
             sandbox="allow-scripts allow-forms allow-same-origin"
           />
         </div>

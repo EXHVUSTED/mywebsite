@@ -1,13 +1,19 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #5e6360;
+  --text-h: #151816;
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-muted: #eeece5;
+  --border: #dedbd2;
+  --code-bg: #ece8dc;
+  --accent: #1f5f4a;
+  --accent-bg: rgba(31, 95, 74, 0.1);
+  --accent-border: rgba(31, 95, 74, 0.35);
+  --accent-hover: #174839;
+  --header-bg: rgba(255, 255, 255, 0.82);
+  --header-border: rgba(222, 219, 210, 0.8);
+  --page-wash: rgba(255, 255, 255, 0.75);
+  --social-bg: rgba(238, 236, 229, 0.6);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -30,32 +36,36 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+:root[data-theme='dark'] {
+  --text: #b8bbb6;
+  --text-h: #f3f1e9;
+  --bg: #111412;
+  --surface: #1a1f1c;
+  --surface-muted: #242a26;
+  --border: #343b36;
+  --code-bg: #242a26;
+  --accent: #8fd6b8;
+  --accent-bg: rgba(143, 214, 184, 0.12);
+  --accent-border: rgba(143, 214, 184, 0.36);
+  --accent-hover: #6fbea0;
+  --header-bg: rgba(26, 31, 28, 0.84);
+  --header-border: rgba(52, 59, 54, 0.9);
+  --page-wash: rgba(255, 255, 255, 0.03);
+  --social-bg: rgba(36, 42, 38, 0.7);
+  --shadow:
+    rgba(0, 0, 0, 0.35) 0 18px 35px -14px, rgba(0, 0, 0, 0.22) 0 4px 12px -6px;
+}
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html {
+  scrollbar-gutter: stable;
+  background: var(--bg);
 }
 
 #root {
-  width: 1126px;
+  width: min(1180px, calc(100% - 32px));
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -64,6 +74,9 @@
 
 body {
   margin: 0;
+  background:
+    linear-gradient(180deg, var(--page-wash), rgba(247, 246, 242, 0)),
+    var(--bg);
 }
 
 h1,
@@ -74,9 +87,9 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: 48px;
   letter-spacing: -1.68px;
-  margin: 32px 0;
+  margin: 24px 0 16px;
   @media (max-width: 1024px) {
     font-size: 36px;
     margin: 20px 0;

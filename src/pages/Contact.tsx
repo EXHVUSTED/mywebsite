@@ -8,11 +8,13 @@ export default function Contact() {
       <h1>{t.contact.title}</h1>
       <p>{t.contact.intro}</p>
       <ul className="page__list">
-        <li>Email: your@email.ru</li>
+        <li>Email: nikitagordeev.de@gmail.com</li>
         <li>
-          {t.contact.phone}: +7 (999) 000-00-00
+          {t.contact.phone}: +49 155 11386879
         </li>
-        <li>Telegram: @yourhandle</li>
+        <li>Telegram: 
+          <a href="https://t.me/xhvust" target="_blank" rel="noopener noreferrer"> https://t.me/xhvust</a>
+        </li>
       </ul>
     </div>
   )

@@ -8,11 +8,20 @@ export default function Order() {
       <h1>{t.order.title}</h1>
       <p>{t.order.intro}</p>
       <h2 className="page__section-title">{t.order.servicesTitle}</h2>
-      <ul className="page__list">
+      <div className="service-grid">
         {t.order.services.map((service) => (
-          <li key={service}>{service}</li>
+          <article className="service-card" key={service.title}>
+            <div>
+              <h3>{service.title}</h3>
+              <p className="service-card__price">{service.price}</p>
+              <p>{service.note}</p>
+            </div>
+            <button className="service-card__button" type="button">
+              {t.order.chooseService}
+            </button>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
