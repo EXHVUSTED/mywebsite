@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import { LanguageProvider, languages, useLanguage } from './i18n'
 import Home from './pages/Home'
 import Order from './pages/Order'
+import Checkout from './pages/Checkout'
 import Contact from './pages/Contact'
 import './App.css'
 
@@ -147,6 +148,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
